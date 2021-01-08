@@ -1,0 +1,170 @@
+﻿@model PatientRecordViewModel
+
+
+<div class="section-window">
+    <div class="popout">
+
+        <div style="width:95%; margin:auto; padding:25px; margin-top:25px">
+            <h1 class="section-window-heading">Record</h1>
+            <hr />
+            <div>
+                <p class="text-warning">@TempData["FormError"]</p>
+                <p style="color:green">@TempData["FormSuccess"]</p>
+            </div>
+            <div style="margin:auto">
+                @if (Model != null)
+                {
+
+                    DateTime dob = (DateTime)Model.Patient.DateOfBirth;
+
+                <div>
+
+                    <div>
+                        <div class="text-horiz-align" >
+                            <h4>First Name: </h4>
+                            <p>@Model.Patient.FirstName</p>
+                        </div>
+
+                        <div class="text-horiz-align">
+                            <h4>Last Name: </h4>
+                            <p>@Model.Patient.LastName</p>
+                        </div>
+
+                        <div class="text-horiz-align">
+                            <h4>Email: </h4>
+                            <p>@Model.Patient.EmailAddress</p>
+                        </div>
+
+                        <div class="text-horiz-align">
+                            <h4>DOB: </h4>
+                            <p>@dob.ToString("MM/dd/yyyy")</p>
+                        </div>
+
+                        <div class="text-horiz-align">
+                            <h4>Phone Number: </h4>
+                            <p>(@Model.Patient.PhoneNumber.Substring(0, 3))@Model.Patient.PhoneNumber.Substring(3, 3)-@Model.Patient.PhoneNumber.Substring(6, 4)</p>
+                        </div>
+
+                        <div class="text-horiz-align">
+                            <h4>Address: </h4>
+                            <p>@Model.Patient.Address1, @Model.Patient.Address2, @Model.Patient.Address3</p>
+                        </div>
+                    </div>
+
+                    <div style="display:block; width:100%; text-align:center; padding:10px">
+                        <div>
+                            <h4>Need to change some information? Click here!</h4>
+                            <button id="editPatientPopupBtn">Edit Information</button>
+                        </div>
+                    </div>
+
+                    @if (Model.Patient.Record == null)
+                    {
+                        <p>You have no record yet with our facility! It will be created after your first visit with us.</p>
+                    }
+                    else
+                    {
+
+                        int counter = 0;
+                        <h1 class="section-window-heading">Unpaid Bills</h1>
+                        <hr />
+                        @foreach (var a in Model.Appointments)
+                        {
+                            if (a.Date < DateTime.Today && !a.Bill.IsPaid)
+                            {
+                                decimal totalBill = 0;
+
+                                foreach (var p in a.Bill.Procedures)
+                                {
+                                    totalBill += p.Cost;
+                                }
+
+                                <div style="border: 1px solid deepskyblue; padding: 15px">
+                                    <p><strong>Date of appointment: </strong>@a.Date.ToString("MM/dd/yyyy")</p>
+                                    <p><strong>Bill: </strong>$@totalBill </p>
+                                    <div style="text-align:right">
+                                        <form method="get" action="@Url.Action("PayBill","Account")">
+                                            <input type="hidden" name="patientId" value="@Model.Patient.Id" />
+                                            <input type="hidden" name="appointmentId" value="@a.Id" />
+                                            <input type="submit" value="Pay Bill" />
+                                        </form>
+                                    </div>
+                                </div>
+                                counter++;
+
+                            }
+                        }
+                        if (counter == 0)
+                        {
+                            <div>
+                                <p>No bills needed to be paid.</p>
+                            </div>
+                        }
+
+                        <h1 class="section-window-heading">Past Appointments</h1>
+                        <hr />
+
+                        <div>
+                            <div class="vertical-menu">
+                                @foreach (var p in Model.Appointments)
+                                {
+                                    <partial name="RecordAppointment" model="@p" />
+                                }
+                            </div>
+                        </div>
+
+                    }
+                </div>
+                }
+                else
+                {
+                    <div>
+                        <h3>
+                            We do not have any information on your record at the moment. If you feel that this is an issue, feel free to contact us
+                            at (888)888-8888 or <a asp-controller="Home" asp-action="Contact">Here</a>.
+                        </h3>
+                    </div>
+                }
+            </div>
+
+
+            <div id="patientEditDialog" hidden>
+                <h1 class="section-window-heading">Edit Patient</h1>
+                <div>
+                    <div class="form">
+                        <div style="max-width:800px; margin:auto">
+                            <form method="post" action="@Url.Action("EditPatient","Account")">
+                                <input type="hidden" asp-for="Patient.Id" />
+                                <input asp-for="Patient.FirstName" />
+                                <span class="form-validation" asp-validation-for="Patient.FirstName"></span>
+                                <input asp-for="Patient.LastName" />
+                                <span class="form-validation" asp-validation-for="Patient.LastName"></span>
+                                <input asp-for="Patient.EmailAddress" />
+                                <span class="form-validation" asp-validation-for="Patient.EmailAddress"></span>
+                                <input asp-for="Patient.PhoneNumber" />
+                                <span class="form-validation" asp-validation-for="Patient.PhoneNumber"></span>
+                                <label asp-for="Patient.DateOfBirth">Date of birth:</label>
+                                <input type="date" asp-for="Patient.DateOfBirth" min="1915-01-01" />
+                                <span class="form-validation" asp-validation-for="Patient.DateOfBirth"></span>
+                                <input asp-for="Patient.Address1" />
+                                <span class="form-validation" asp-validation-for="Patient.Address1"></span>
+                                <input asp-for="Patient.Address2" />
+                                <span class="form-validation" asp-validation-for="Patient.Address2"></span>
+                                <input asp-for="Patient.Address3" />
+                                <span class="form-validation" asp-validation-for="Patient.Address3"></span>
+                                <input type="hidden" asp-for="Patient.Record" />
+                                <input type="submit" name="SubmitPost" value="Confirm Edit" />
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display:inline-block"><button id="editPatientBackBtn">Back</button></div>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+

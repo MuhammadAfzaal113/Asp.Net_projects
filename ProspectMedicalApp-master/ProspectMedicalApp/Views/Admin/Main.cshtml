@@ -1,0 +1,42 @@
+﻿@model IEnumerable<PatientViewModel>
+
+@{
+    ViewData["Title"] = "Main";
+}
+@section Scripts{
+    <script src="~/dist/jquery-validate/js/jquery.validate.min.js"></script>
+    <script src="~/dist/jquery-validate/js/jquery.validate.unobtrusive.min.js"></script>
+}
+
+<div class="section-window">
+    <div class="popout" style="padding:25px">
+        <h1 class="section-window-heading">Admin Control</h1>
+        <hr />
+        <h1 class="section-window-heading">Patient Control</h1>
+        <div>
+            <div class="vertical-menu">
+                @foreach (var p in Model)
+                {
+                    <partial name="PatientById" model="@p" />
+                }
+            </div>
+        </div>
+        <div class="base-link">
+            <hr />
+            <h1 class="section-window-heading">Find Patient By Name</h1>
+            <div class="text-warning">
+                @TempData["FormError"]
+            </div>
+
+            <partial name="FindPatient" model="new PatientViewModel()" />
+
+            <div style="text-align:center">
+
+                <a class="base-link" style="width:150px; border:1px solid black; margin:5px auto"
+                   asp-controller="Admin" asp-action="AddPatient">Add new patient</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,65 @@
+﻿@model ContactViewModel
+@{
+    ViewData["Title"] = "Contact";
+}
+@section Scripts{
+    <script src="~/dist/jquery-validate/js/jquery.validate.min.js"></script>
+    <script src="~/dist/jquery-validate/js/jquery.validate.unobtrusive.min.js"></script>
+}
+
+
+<div class="section popout" style="width:100%; max-width:1000px; margin: 25px auto 0 auto">
+    <div class="section-text" style="width:90%; margin:0 auto;">
+        <h1 style="text-align:center">Fill out the form below to send us your inquiry.</h1>
+        <hr />
+    </div>
+    <div style="color:forestgreen;width:90%; margin:0 auto; text-align:center"><h3>@ViewBag.UserMessage</h3></div>
+    <div style="color:red;width:90%; margin:0 auto; text-align:center"><h3>@ViewBag.ValidationError</h3></div>
+    <div class="form" style="max-width:1000px; overflow:hidden;">
+        <h1 style="text-align:center">Contact Us</h1>
+        <form method="post">
+            <div style="display:block;">
+                <label asp-for="FirstName">First Name:</label>
+                <input asp-for="FirstName" placeholder="First Name" />
+                <span class="form-validation" asp-validation-for="FirstName"></span>
+
+                <label asp-for="LastName">Last Name:</label>
+                <input asp-for="LastName" placeholder="Last Name" />
+                <span class="form-validation" asp-validation-for="LastName"></span>
+
+                <label asp-for="Email">Email Address:</label>
+                <input type="email" asp-for="Email" />
+                <span class="form-validation" asp-validation-for="Email"></span>
+
+                <label asp-for="PhoneNumber">Phone Number:</label>
+                <input type="tel" asp-for="PhoneNumber" />
+                <span class="form-validation" asp-validation-for="PhoneNumber"></span>
+
+                <label asp-for="Reason">Reason For Contact:</label>
+                <select id="contactOptions" asp-for="Reason">
+                    <option value="r1">Comment</option>
+                    <option value="r2">Payment</option>
+                    <option value="r3">More Information</option>
+                    <option value="r4">Other</option>
+                </select>
+
+                <div id="otherTextbox" style="display:none">
+                    <label asp-for="ReasonInput">Input Your Reason Below:</label>
+                    <input asp-for="ReasonInput" id="otherReason" />
+                </div>
+
+                <label asp-for="Message">Message:</label>
+                <textarea rows="8" asp-for="Message"></textarea>
+                <span class="form-validation" style="float:left" asp-validation-for="Message"></span>
+
+
+                <input type="submit" value="Submit" style="float:right" />
+
+            </div>
+        </form>
+
+    </div>
+    <h4 style="display:block; text-align:center; padding-bottom:25px;">We will respond to you as soon as possible!</h4>
+
+</div>
+

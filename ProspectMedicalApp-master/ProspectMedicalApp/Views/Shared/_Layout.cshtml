@@ -1,0 +1,132 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Assistant&display=swap" rel="stylesheet">
+    <link href="~/dist/fontawesome/css/all.css" rel="stylesheet" />
+    <link href="~/dist/jquery-ui/css/jquery-ui.min.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+
+</head>
+<body>
+
+    <div class="section" style="width:100%; background-color:#d07014">
+        <div class="nav-Container" style="max-width:1300px; margin:auto">
+
+
+            <a asp-controller="Home" asp-action="Index" class="nav-Brand">
+                <img src="img/IMG_Brand.png" />
+                <h2>Prospective Family Medicine</h2>
+            </a>
+
+            <div class="nav-header-right">
+                <div class="nav-sm-base">
+                    <div class="nav-sm">
+                        <p>Contact us!</p>
+                        <ul class="sm-links">
+                            <li><a asp-controller="Home" asp-action="Contact"><i class="fa fa-1x fa-envelope"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="nav-sm">
+                        <p>Follow us!</p>
+                        <ul class="sm-links">
+                            <li><a href="#"><i class="fab fa-1x fa-facebook-square"></i></a></li>
+                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="nav-login">
+                    <div class="base-link" style="width:255px; margin:0 auto">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a asp-controller="Account" asp-action="Logout"><i class="fa fa-sign-out-alt"></i>  Click to Log out </a>
+                            <div class="nav-user-info">
+
+                                <p>Hello @User.Identity.Name!</p>
+
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <a asp-controller="Admin" asp-action="Main">Admin Tools</a>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <a asp-controller="Account" asp-action="Login"><i class="fa fa-sign-in-alt"></i>  Click to Login </a>
+                        }
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="nav-Container" style="background-color:deepskyblue;color:white;line-height:1px;padding:0">
+        <p><i class="fa fa-phone"></i> Call us to make an appointment! (888)888-8888 <i class="fa fa-phone"></i></p>
+    </div>
+    <div class="nav-Container">
+
+        <button id="navListButton" hidden><i class="fa fa-bars"></i></button>
+
+        <div id="navList">
+            <ul class="nav-list">
+                <li><a asp-controller="Home" asp-action="NewAppointment"><i class="fa fa-2x fa-calendar-check"></i><p>Make An Appointment</p></a></li>
+                <li>
+                    <a asp-controller="Home" asp-action="Services"><i class="fa fa-2x fa-notes-medical"></i><p>Services</p></a>
+                </li>
+                <li><a asp-controller="Home" asp-action="Doctors"><i class="fa fa-2x fa-user-md"></i><p>Meet The Doctors</p></a></li>
+                <li><a asp-controller="Account" asp-action="Record"><i class="fa fa-2x fa-money-bill-alt"></i><p>Payment</p></a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    @RenderBody();
+
+    <div class="footer">
+        <div class="section-row">
+            <div class="section-column-50">
+                <p class="section-heading">Information</p>
+                <ul class="links">
+                    <li><a asp-controller="Home" asp-action="Services">Services</a></li>
+                    <li><a asp-controller="Home" asp-action="Doctors">Find a Doctor</a></li>
+                    <li><a href="#">Patient Records</a></li>
+                </ul>
+            </div>
+            <div class="section-column-50">
+                <p class="section-heading">Contact</p>
+                <ul class="links">
+                    <li><a asp-controller="Home" asp-action="Contact">Contact Us</a></li>
+                </ul>
+                <div>
+                    <p class="section-heading">Follow Us!</p>
+                    <ul class="sm-links">
+                        <li><a href="#"><i class="fab fa-1x fa-facebook-square"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer-copyright">
+        <div class="section-row">
+            <div class="section-column-50">
+                <p>Copyright 2019</p>
+            </div>
+            <div class="section-column-50">
+                <p>Created by Joshua Favo</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/dist/fontawesome/js/all.js"></script>
+    <script src="~/dist/jquery/js/jquery.min.js"></script>
+    <script src="~/dist/jquery-ui/js/jquery-ui.min.js"></script>
+    <script src="~/js/index.js"></script>
+    @RenderSection("scripts", false)
+</body>
+</html>

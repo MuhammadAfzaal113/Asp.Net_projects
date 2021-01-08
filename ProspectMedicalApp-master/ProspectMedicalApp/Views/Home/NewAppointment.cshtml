@@ -1,0 +1,82 @@
+﻿@model AppointmentRequestViewModel
+@{
+    ViewData["Title"] = "NewAppointment";
+}
+@section Scripts{
+    <script src="~/dist/jquery-validate/js/jquery.validate.min.js"></script>
+    <script src="~/dist/jquery-validate/js/jquery.validate.unobtrusive.min.js"></script>
+}
+
+<div class="section popout" style="width:100%; max-width:1000px; margin:25px auto 0 auto">
+    <div class="section-text">
+        <h1 class="section-window-heading">Schedule an appointment</h1>
+        <hr />
+
+        <div style="text-align:center; color:green">@ViewBag.AppointmentSuccess</div>
+        <div style="color:red;width:90%; margin:0 auto; text-align:center"><h3>@ViewBag.ValidationError</h3></div>
+
+        <div class="form appointment-form">
+            <form method="post">
+                <div class="appointment-form-input1">
+                    <div>
+
+                        <label asp-for="FirstName">
+                            First Name:
+                        </label>
+                        <input asp-for="FirstName" type="text" />
+                        <span class="form-validation" asp-validation-for="FirstName"></span>
+
+                        <label asp-for="LastName">
+                            Last Name:
+                        </label>
+                        <input asp-for="LastName" type="text" />
+                        <span class="form-validation" asp-validation-for="LastName"></span>
+
+                        <label asp-for="Email">
+                            Email:
+                        </label>
+                        <input asp-for="Email" type="email" />
+                        <span class="form-validation" asp-validation-for="Email"></span>
+
+                        <label asp-for="PhoneNumber">
+                            Phone Number:
+                        </label>
+                        <input asp-for="PhoneNumber" type="tel" />
+                        <span class="form-validation" asp-validation-for="PhoneNumber"></span>
+
+                        <label asp-for="AppointmentDate">
+                            Date:
+                        </label>
+                        <input asp-for="AppointmentDate" id="appointmentDate" type="text" readonly />
+                        <span class="form-validation" asp-validation-for="AppointmentDate"></span>
+
+                    </div>
+                </div>
+                <div class="appointment-form-input2">
+                    <div>
+
+                        <label asp-for="AppointmentType">
+                            Appointment Type:
+                        </label>
+                        <select asp-for="AppointmentType">
+                            <option id="One">One</option>
+                            <option id="Two">Two</option>
+                            <option id="Three">Three</option>
+                            <option id="Four">Four</option>
+                        </select>
+                        <label asp-for="Message">
+                            Additional Information: (If needed)
+                        </label>
+                        <textarea asp-for="Message" rows="6"></textarea>
+                        <span class="form-validation" style="float:left" asp-validation-for="Message"></span>
+
+                        <input style="float:right" type="submit" value="Submit" />
+
+                    </div>
+                </div>
+            </form>
+        </div>
+        <h3 style="text-align:center">We will contact you with comfirmation of your appointment.</h3>
+    </div>
+</div>
+

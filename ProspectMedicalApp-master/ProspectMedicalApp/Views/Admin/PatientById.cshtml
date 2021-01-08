@@ -1,0 +1,13 @@
+﻿@model PatientViewModel
+
+<div style="width:100%; padding-left:10px">
+    <div style="display:inline-block; width:48%;">
+        <p>@Model.LastName, @Model.FirstName.Substring(0, 1)</p>
+    </div>
+    <div style="display:inline-block; width:48%; text-align:right">
+        <form method="post">
+            <input type="hidden" asp-for="Id" value="@Model.Id" />
+            <input type="submit" name="submit" id="patientById" value="Select Patient" />
+        </form>
+    </div>
+</div>

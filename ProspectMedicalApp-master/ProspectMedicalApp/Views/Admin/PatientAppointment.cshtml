@@ -1,0 +1,23 @@
+﻿@model AdminViewModel
+
+@{
+    ViewData["Title"] = "AddPatient";
+}
+@section Scripts{
+    <script src="~/js/jquery.validate.min.js"></script>
+    <script src="~/js/jquery.validate.unobtrusive.min.js"></script>
+}
+
+<h1 class="section-window-heading">Schedule Appointment</h1>
+<hr />
+<div>
+
+</div>
+<div>
+    <form method="get" action="@Url.Action("AppointmentToMain", "Admin")">
+        <input type="hidden" asp-for="Patient.Id" value="@Model.Patient.Id" />
+        <input type="submit" name="submitBtn" value="Back To Main" />
+    </form>
+</div>
+
+

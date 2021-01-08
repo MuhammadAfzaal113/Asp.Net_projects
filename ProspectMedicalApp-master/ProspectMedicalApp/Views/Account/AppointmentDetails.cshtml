@@ -1,0 +1,43 @@
+﻿@model AppointmentViewModel
+
+<div class="section-window">
+    <div class="popout">
+        <div style="padding:15px">
+            <h1 class="section-window-heading">Appointment Details</h1>
+            <hr />
+
+            <div>
+                <div class="text-horiz-align">
+                    <h4>Date of appointment:</h4>
+                    <p>@Model.Date.ToString("MM/dd/yyyy")</p>
+                </div>
+            </div>
+
+            <div style="padding:15px">
+                <h3>Procedures</h3>
+                <div style="border:1px solid deepskyblue">
+
+                    @foreach (var p in Model.Bill.Procedures)
+                    {
+                        <div class="text-horiz-align">
+                            <h4>@p.Name</h4>
+                            <p>@p.Description</p>
+                        </div>
+                    }
+
+                </div>
+
+                @if (Model.Bill.IsPaid)
+                {
+                    <p style="text-align:center;color:green">Bill is paid! Thank you!</p>
+                }
+
+            </div>
+
+            <div class="section-text" style="padding:25px">
+                <a asp-action="Record" asp-controller="Account">Back To Record</a>
+            </div>        
+        </div>
+    </div>
+</div>
+    

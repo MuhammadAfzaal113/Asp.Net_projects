@@ -1,0 +1,118 @@
+﻿@model UpdateAppointmentViewModel
+
+@{ 
+    Dictionary<string, List<ProcedureViewModel>> sortedProcedures = new Dictionary<string, List<ProcedureViewModel>>();
+    for (int i = 0; i < Model.Procedures.Count(); i++)
+    {
+        string category = Model.Procedures[i].Category;
+        if (sortedProcedures.ContainsKey(category))
+        {
+            sortedProcedures[category].Add(Model.Procedures[i]);
+        }
+        else
+        {
+            List<ProcedureViewModel> tmp = new List<ProcedureViewModel>();
+            tmp.Add(Model.Procedures[i]);
+
+            sortedProcedures.Add(category, tmp);
+        }
+    }
+}
+
+<div class="section-window">
+    <div class="popout">
+        <div style="padding:25px">
+            <h1 class="section-window-heading">Update Appointment</h1>
+            <hr />
+
+            <div>
+                <form method="post">
+                    <input type="hidden" name="id" asp-for="PatientId" />
+                    <input type="submit" name="AppointmentSubmit" value="Back To Patient" />
+                </form>
+            </div>
+
+            <div style="padding:25px">
+                <h3>Appointment:</h3>
+                <p>Date: @Model.Appointment.Date.ToString("MM/dd/yyyy")</p>
+                <p>Time: @Model.Appointment.Date.ToString("h:mm tt")</p>
+                <div>
+                    <h4>Current Procedures:</h4>
+                    @if (Model.Appointment.Bill.Procedures == null || Model.Appointment.Bill.Procedures.Count == 0)
+                    {
+                        <p>There are no procedures currently applied to this appointment.</p>
+                    }
+                    else
+                    {
+                        decimal totalCost = 0;
+                        foreach (var p in Model.Appointment.Bill.Procedures)
+                        {
+                            totalCost += p.Cost;
+
+                            <div style="border:1px solid deepskyblue; padding:10px">
+                                <p style="display:inline-block; width:49%">Procedure: @p.Name</p>
+                                <p style="display:inline-block; width:49%; text-align:right">Cost: $@p.Cost</p>
+
+                                @if (p.Name != "Visit")
+                                {
+                                <div style="text-align:right">
+                                    <form method="post">
+                                        <input type="hidden" asp-for="PatientId" />
+                                        <input type="hidden" name="procedureId" value="@p.Id" />
+                                        <input type="hidden" name="appointmentId" value="@Model.Appointment.Id" />
+                                        <input type="submit" name="AppointmentSubmit" value="Remove" />
+                                    </form>
+                                </div>
+                                }
+                            </div>
+                        }
+                        <div style="width:100%">
+                            <p style="display:inline-block;width:49%;text-align:left"><strong>Total cost:</strong></p>
+                            <p style="display:inline-block;width:50%;text-align:right">$@totalCost</p>
+                        </div>
+                    }
+                </div>
+            </div>
+            <h1 class="section-window-heading">Add Procedures</h1>
+            <hr />
+            <div>
+
+                @foreach (var p in sortedProcedures)
+                {
+                    <div>
+                        <h3>Type: @p.Key</h3>
+                        <ul style="list-style:none; width:100%; margin:0; padding:0; text-align:center">
+                            @for (int i = 0; i < p.Value.Count; i++)
+                            {
+                                if (Model.Appointment.Bill.Procedures.Contains(p.Value[i]))
+                                {
+                                    continue;
+                                }
+
+                                <li class="popout" style="display:inline-block; padding:10px; margin:5px auto; width:350px; min-height:250px; vertical-align:middle">
+                                    <h4>@p.Value[i].Name</h4>
+                                    <p>@p.Value[i].Description</p>
+                                    <form method="post">
+                                        <input type="hidden" name="appointmentId" value="@Model.Appointment.Id" />
+                                        <input type="hidden" name="procedureId" value="@p.Value[i].Id" />
+                                        <input type="submit" name="AppointmentSubmit" value="Add To Appointment" />
+                                    </form>
+                                </li>
+
+                            }
+                        </ul>
+                    </div>
+                }
+
+            </div>
+            <hr />
+            <div>
+                <form method="post">
+                    <input type="hidden" name="id" asp-for="PatientId" />
+                    <input type="submit" name="AppointmentSubmit" value="Back To Patient" />
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

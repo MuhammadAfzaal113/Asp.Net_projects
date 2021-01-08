@@ -1,0 +1,32 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+@section Scripts{
+    <script src="~/dist/jquery-validate/js/jquery.validate.min.js"></script>
+    <script src="~/dist/jquery-validate/js/jquery.validate.unobtrusive.min.js"></script>
+}
+
+<div class="popout" style="max-width:1000px; margin:25px auto 0 auto; padding:75px 25px; overflow:hidden">
+    <h2 class="section-window-heading">Login</h2>
+    <hr style=" margin-bottom:50px" />
+    <div>
+        <p class="text-warning">@TempData["NeedLogin"]</p>
+    </div>
+    <div class="form" style="padding:50px">
+
+        <form method="post">
+            <div asp-validation-summary="ModelOnly"></div>
+            <label asp-for="Username">Username:</label>
+            <input type="text" asp-for="Username" placeholder="Username" />
+            <span class="form-validation" asp-validation-for="Username"></span>
+            <label asp-for="Password">Password:</label>
+            <input type="password" asp-for="Password" placeholder="Password" />
+            <span class="form-validation" asp-validation-for="Password"></span>
+            <br />
+            <div style="display:block; width:100%; text-align:right">
+                <input type="submit" value="Login" />
+            </div>
+        </form>
+    </div>
+</div>

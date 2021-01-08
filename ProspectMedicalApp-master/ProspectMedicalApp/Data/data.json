@@ -1,0 +1,95 @@
+[
+  [
+    {
+      "FirstName": "Dom",
+      "LastName": "Dude",
+      "EmailAddress": "DDude@pma.com"
+
+    },
+    {
+      "FirstName": "Dorian",
+      "LastName": "Dude Jr.",
+      "EmailAddress": "DorDude@pma.com"
+    },
+    {
+      "FirstName": "Debra",
+      "LastName": "Dudette",
+      "EmailAddress": "DDudette@pma.com"
+    }
+  ],
+  [
+    {
+      "Name": "Visit",
+      "Category": "Base",
+      "Description": "Visit with your doctor.",
+      "Cost": 50.00
+    },
+    {
+      "Name": "Urine Test",
+      "Category": "Test",
+      "Description": "Testing urine for information about condition.",
+      "Cost": 10.00
+    },
+    {
+      "Name": "Strep Test",
+      "Category": "Test",
+      "Description": "Swab throat to check for strep virus.",
+      "Cost": 10.00
+    },
+    {
+      "Name": "Bone Splint",
+      "Category": "Procedure",
+      "Description": "Placement of split on broken bone in order to allow for proper healing.",
+      "Cost": 30.00
+    },
+    {
+      "Name": "Stitches",
+      "Category": "Procedure",
+      "Description": "Stitching wound together for proper healing.",
+      "Cost": 20.00
+    },
+    {
+      "Name": "X-ray",
+      "Category": "Test",
+      "Description": "X-ray of body part in order to assess any injuries.",
+      "Cost": 50.00
+    }
+
+  ],
+  [
+    {
+      "FirstName": "Testy",
+      "LastName": "Westy",
+      "EmailAddress": "testp@email.com",
+      "DateOfBirth":  "1990-08-28",
+      "Address1": "1234 test rd",
+      "Address2": "testPlace",
+      "Address3": "teststate",
+      "ZipCode": 12345,
+      "PhoneNumber": "1234567890"
+    },
+    {
+      "FirstName": "Hoster",
+      "LastName": "Westy",
+      "EmailAddress": "hostp@email.com",
+      "DateOfBirth": "1986-01-21",
+      "Address1": "1234 test rd",
+      "Address2": "testPlace",
+      "Address3": "teststate",
+      "ZipCode": 12345,
+      "PhoneNumber": "8888675309"
+    },
+    {
+      "FirstName": "Tester",
+      "LastName": "Bester",
+      "EmailAddress": "testp2@email.com",
+      "DateOfBirth": "1994-11-01",
+      "Address1": "568 tester ln",
+      "Address2": "testPlace",
+      "Address3": "teststate",
+      "ZipCode": 44568,
+      "PhoneNumber": "0987654321"
+    }
+  ]
+]
+
