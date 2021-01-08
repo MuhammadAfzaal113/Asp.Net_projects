@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "PMAConnectionString": "server=(localdb)\\ProjectsV13;Database=PMADb;Integrated Security=true;MultipleActiveResultSets=true;"
+  }
+}

@@ -1,0 +1,51 @@
+﻿@model PatientRecordViewModel
+
+@{
+    decimal totalBill = 0;
+    foreach (var p in Model.Appointments.First().Bill.Procedures)
+    {
+        totalBill += p.Cost;
+    }
+}
+
+<div class="section-window">
+    <div class="popout">
+        <div style="padding:15px">
+            <h1 class="section-window-heading">Pay Bill</h1>
+            <hr />
+            <div style="border:1px solid deepskyblue">
+                <div class="text-horiz-align">
+                    <h4>Appointment Date:</h4>
+                    <p>@Model.Appointments.First().Date.ToString("MM/dd/yyyy")</p>
+                </div>
+                <div class="text-horiz-align">
+                    <h4>Total Cost:</h4>
+                    <p>$@totalBill</p>
+                </div>
+                <div style="text-align:right; padding:15px">
+                    <button id="payBillPopupBtn">Pay Bill</button>
+                </div>
+
+            </div>
+            <div class="section-text" style="padding:25px">
+                <a asp-action="Record" asp-controller="Account">Back To Record</a>
+            </div>
+
+            <div id="payBillForm" hidden>
+                <div class="text-horiz-align">
+                    <h4>Total Cost:</h4>
+                    <p>$@totalBill</p>
+                </div>
+                <div style="padding:15px">
+                    <button style="text-align:left; display:inline-block" id="payBillFormBackBtn">Back</button>
+
+                    <form style="text-align:right; display:inline-block" method="post">
+                        <input type="hidden" name="appointmentId" value="@Model.Appointments.First().Id" />
+                        <input type="submit" value="Pay Bill" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

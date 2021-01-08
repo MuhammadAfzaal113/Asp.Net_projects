@@ -1,0 +1,44 @@
+﻿@model AdminViewModel
+
+@{
+    ViewData["Title"] = "AddPatient";
+}
+@section Scripts{
+    <script src="~/dist/jquery-validate/js/jquery.validate.min.js"></script>
+    <script src="~/dist/jquery-validate/js/jquery.validate.unobtrusive.min.js"></script>
+}
+
+<h1 class="section-window-heading">New Patient</h1>
+<hr />
+<div class="text-warning">@TempData["FormError"]</div>
+<div class="form">
+    <div style="max-width:800px; margin:auto">
+        <form method="post">
+            <input asp-for="Patient.FirstName" placeholder="First Name" />
+            <span class="form-validation" asp-validation-for="Patient.FirstName"></span>
+            <input asp-for="Patient.LastName" placeholder="Last Name" />
+            <span class="form-validation" asp-validation-for="Patient.LastName"></span>
+            <input asp-for="Patient.EmailAddress" placeholder="Email Address" />
+            <span class="form-validation" asp-validation-for="Patient.EmailAddress"></span>
+            <input asp-for="Patient.PhoneNumber" placeholder="Phone number" />
+            <span class="form-validation" asp-validation-for="Patient.PhoneNumber"></span>
+            <label asp-for="Patient.DateOfBirth">Date of birth:</label>
+            <input type="date" asp-for="Patient.DateOfBirth" min="1915-01-01" />
+            <span class="form-validation" asp-validation-for="Patient.DateOfBirth"></span>
+            <input asp-for="Patient.Address1" placeholder="Street Address" />
+            <span class="form-validation" asp-validation-for="Patient.Address1"></span>
+            <input asp-for="Patient.Address2" placeholder="City" />
+            <span class="form-validation" asp-validation-for="Patient.Address2"></span>
+            <input asp-for="Patient.Address3" placeholder="State" />
+            <span class="form-validation" asp-validation-for="Patient.Address3"></span>
+            <label>Select Doctor for Patient:</label>
+            <select name="doctorId">
+                @foreach (var d in Model.Doctors)
+                {
+                    <option value="@d.Id">Dr. @d.LastName</option>
+                }
+            </select>
+            <input type="submit" name="SubmitPost" value="Add Patient" />
+        </form>
+    </div>
+</div>

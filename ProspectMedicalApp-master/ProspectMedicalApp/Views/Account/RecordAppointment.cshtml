@@ -1,0 +1,13 @@
+﻿@model AppointmentViewModel
+
+<div style="width:100%; padding-left:10px; border-bottom:1px solid deepskyblue">
+    <div style="display:inline-block; width:48%;">
+        <p>Date: @Model.Date.ToString("MM/dd/yyyy")</p>
+    </div>
+    <div style="display:inline-block; width:48%; text-align:right">
+        <form method="post" action="@Url.Action("AppointmentDetails", "Account")">
+            <input type="hidden" name="appointmentId" asp-for="Id" value="@Model.Id" />
+            <input type="submit" name="submit" value="More Details" />
+        </form>
+    </div>
+</div>

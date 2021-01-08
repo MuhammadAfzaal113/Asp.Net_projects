@@ -1,0 +1,21 @@
+﻿@model PatientViewModel
+
+@section Scripts{
+    <script src="~/dist/jquery-validate/js/jquery.validate.min.js"></script>
+    <script src="~/dist/jquery-validate/js/jquery.validate.unobtrusive.min.js"></script>
+}
+
+<div class="form">
+    <div style="max-width:800px; margin:auto">
+        <form method="post">
+            <input type="hidden" asp-for="DateOfBirth" />
+            <label asp-for="FirstName">Patient's first name</label>
+            <input asp-for="FirstName" id="firstName" type="text" />
+            <span class="form-validation" asp-validation-for="FirstName"></span>
+            <label asp-for="LastName">Patient's last name</label>
+            <input asp-for="LastName" id="lastName" type="text" />
+            <span class="form-validation" asp-validation-for="LastName"></span>
+            <input type="submit" name="submit" id="submit" value="Find Patient" />
+        </form>
+    </div>
+</div>

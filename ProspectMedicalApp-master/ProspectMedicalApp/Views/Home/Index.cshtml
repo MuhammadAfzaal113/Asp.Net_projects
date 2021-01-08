@@ -1,0 +1,145 @@
+﻿@{ 
+    ViewBag.Title = "Home";
+}
+
+<div id="banner" class="section" style="margin:10px 0">
+    <img class="section-img-fluid" src="img/IMG_MainBanner.jpg" />
+    <div class="banner-Greeting">
+        <p>Here at Prospective Family Medicine we care about you and your families needs just as much as you do!</p>
+    </div>
+</div>
+<div id="bannerFillIn" class="section" hidden>
+    <img class="section-img-fluid" src="img/IMG_MainBanner.jpg" />
+    <h1 class="section-heading">Welcome to Prospective Family Medicine!</h1>
+    <p class="section-body" style="color:black">
+        Here at Prospective Family Medicine we care about you and your families needs just as much as you do!
+    </p>
+</div>
+
+<div class="section popout" style="background-color:deepskyblue;">
+
+    <div class="service-container" style="padding:10px">
+        <div id="serviceImg" class="service-container-img">
+
+            <img class="section-img-fluid" src="img/IMG_0840.jpg" />
+        </div>
+        <div id="serviceTab" class="service-container-info">
+
+            <div>
+                <p class="section-heading">Services</p>
+                <p class="section-body">
+                    We offer so many services. Like, so many!
+                    So so many! MANY!
+                </p>
+                <a asp-controller="Home" asp-action="Services">Click Here To See Services Offered</a>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="section">
+
+    <div class="section-row">
+        <div id="staffText" class="section-column-66">
+            <div class="section-text">
+                <p class="section-heading">Our Staff</p>
+                <p class="section-body" style="color:black">
+                    Our staff of caring physicians know what is important when it
+                    comes to patient care. From making sure our patients are cared for and are informed to
+                    make the best decision for them and their families.
+                </p>
+                <a asp-controller="Home" asp-action="Doctors">Click Here To Learn More About The Staff</a>
+            </div>
+        </div>
+        <div id="staffImg" class="section-column-33">
+            <div class="home-staff">
+                <ul>
+                    <li>
+                        <img src="img/IMG_Doc1.jpg" />
+                        <div class="home-staff-description">
+                            <h1>Dr. Dude</h1>
+                            <p>Dr. Dude is just the best!</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="img/IMG_Doc2.jpg" />
+                        <div class="home-staff-description">
+                            <h1>Dr. Dude Jr.</h1>
+                            <p>Dr. Dude Jr. is just the best!</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="img/IMG_Doc3.jpg" />
+                        <div class="home-staff-description">
+                            <h1>Dr. Dudette</h1>
+                            <p>Dr. Dudette is just the best!</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="section home-testimonials popout">
+    <div class="slideshow-container ">
+        <div class="home-testimonials-message">
+            <div class="slideshow-slides fade">
+                <p>"I love all of the faculty here! one of the best!"</p>
+                <div class="home-testimonials-author">
+                    <img class="popout" src="~/img/IMG_Testimonial1.jpg" />
+                    <p>Emma Knotfake</p>
+                </div>
+            </div>
+            <div class="slideshow-slides fade">
+                <p>"Blah blah blah blah blah blah blah blah blah blah blah blah blah"</p>
+                <div class="home-testimonials-author">
+                    <img class="popout" src="~/img/IMG_Testimonial2.jpg" />
+                    <p>Borbin Blah</p>
+                </div>
+            </div>
+            <div class="slideshow-slides fade">
+                <p>"Blah blah blah blah blah blah blah blah blah blah blah blah blah"</p>
+                <div class="home-testimonials-author">
+                    <img class="popout" src="~/img/IMG_Testimonial3.jpg" />
+                    <p>Brandon Blah</p>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <span class="slideshow-dot"></span>
+            <span class="slideshow-dot"></span>
+            <span class="slideshow-dot"></span>
+        </div>
+    </div>
+</div>
+
+<div class="section">
+    <p class="section-heading">Accepted Insurances</p>
+    <div class="section-insurance">
+
+        <ul>
+            <li>
+                <img src="img/IMG_HImedicare.png" />
+            </li>
+            <li>
+                <img src="img/IMG_HIcigna.jpg" />
+            </li>
+            <li>
+                <img src="img/IMG_HIbcbs.gif" />
+            </li>
+            <li>
+                <img src="img/IMG_HIaetna.png" />
+            </li>
+            <li>
+                <img src="img/IMG_HIahip.jpg" />
+            </li>
+        </ul>
+    </div>
+
+</div>
+
