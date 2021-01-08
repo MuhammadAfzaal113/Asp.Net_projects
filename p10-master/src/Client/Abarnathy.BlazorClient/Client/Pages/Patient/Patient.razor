@@ -1,0 +1,196 @@
+@using Abarnathy.BlazorClient.Client.Shared.Components
+@using Abarnathy.BlazorClient.Client.Shared.Components.NoteDisplay
+@using Abarnathy.BlazorClient.Client.Models
+@page "/Patient/{Id:int}"
+
+<div class="container mb-5">
+
+    <div class="row d-flex flex-column justify-content-center">
+
+        <div class="row d-flex justify-content-center">
+            <h2 class="mb-4 mt-4">Patient Overview</h2>
+        </div>
+
+        <div class="row d-flex justify-content-center">
+            <div class="@RiskLevelCardClass()">
+                Diabetes risk level: <strong>@RiskLevelDescriptionString().</strong>
+            </div>
+        </div>
+    </div>
+
+    @if (OperationStatus == PatientSingleOperationStatusEnum.GET_Success)
+    {
+        <div class="row d-flex justify-content-between align-items-center">
+
+            <div class="col">
+                <h5 class="mt-4 mb-2">Personal Details</h5>
+            </div>
+
+            <div class="col d-flex justify-content-end">
+                <NavLink href="@($"/Patient/Edit/{Id}")">
+                    <button class="btn btn-warning btn-sm mt-4 mb-2">
+                        Edit Patient Data
+                    </button>
+                </NavLink>
+            </div>
+        </div>
+
+
+        <table class="table table-sm table-hover table-striped">
+            <thead>
+            <tr>
+                <th scope="col">
+                    Given Name
+                </th>
+                <th scope="col">
+                    Family Name
+                </th>
+                <th scope="col">
+                    Date of Birth
+                </th>
+                <th scope="col">
+                    Sex
+                </th>
+            </tr>
+            </thead>
+
+            <tbody>
+            @if (PatientModel != null)
+            {
+                var sex = PatientModel.SexId == 1 ? "Male" : "Female";
+
+                <tr>
+                    <td>@PatientModel.GivenName</td>
+                    <td>@PatientModel.FamilyName</td>
+                    <td>@PatientModel.DateOfBirth.Date.ToString("dd/MM/yyyy")</td>
+                    <td>@sex</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+
+        <h5 class="pt-4 pb-2">Phone Numbers</h5>
+
+        @if (PatientModel?.PhoneNumbers != null && PatientModel.PhoneNumbers.Any())
+        {
+            <table class="table table-sm table-hover table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">
+                        Number
+                    </th>
+                </tr>
+                </thead>
+
+
+                <tbody>
+                @foreach (var number in PatientModel.PhoneNumbers)
+                {
+                    <tr>
+                        <td>@number.ToString()</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>There are no phone numbers recorded for this patient.</p>
+        }
+
+        <h5 class="pt-4 pb-2">Addresses</h5>
+
+        @if (PatientModel?.Addresses != null && PatientModel.Addresses.Any())
+        {
+            <table class="table table-sm table-hover table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">
+                        Street Name
+                    </th>
+                    <th scope="col">
+                        House Number
+                    </th>
+                    <th scope="col">
+                        Town
+                    </th>
+                    <th scope="col">
+                        State
+                    </th>
+                    <th scope="col">
+                        ZIP Code
+                    </th>
+                </tr>
+                </thead>
+
+                <tbody>
+                @foreach (var address in PatientModel.Addresses)
+                {
+                    <tr>
+                        <td>@address.StreetName</td>
+                        <td>@address.HouseNumber</td>
+                        <td>@address.Town</td>
+                        <td>@address.State</td>
+                        <td>@address.ZipCode</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>There are no addresss recorded for this patient.</p>
+        }
+
+        <hr/>
+
+        <div class="row d-flex justify-content-between align-items-center">
+            
+            <div class="col">
+                <h5 class="mt-4 mb-4">History</h5>
+            </div>
+
+            <div class="col d-flex justify-content-end">
+                <NavLink href=@($"/Patient/{Id}/History/Note/Create")>
+                    <button class="btn btn-success btn-sm text-white mt-4 mb-2">
+                        Add New Note
+                    </button>
+                </NavLink>
+            </div>
+            
+        </div>
+
+        <NoteDisplay PatientId="@Id"/>
+    }
+
+    @if (OperationStatus == PatientSingleOperationStatusEnum.GET_Pending)
+    {
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center mb-2">
+                <div id="loading"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+                <small class="text-muted">Please wait...</small>
+            </div>
+        </div>
+    }
+
+    @if (OperationStatus == PatientSingleOperationStatusEnum.GET_Error)
+    {
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center mb-2">
+                <h3>Error</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+                <p class="text-danger">An error has occurred.</p>
+            </div>
+        </div>
+    }
+
+</div>
